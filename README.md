@@ -14,7 +14,7 @@ A dynamic, animated career timeline built with **React** and **Framer Motion**, 
 - **Responsive Design**: Styled with Tailwind CSS for a sleek, mobile-friendly UI.
 - **Skill Highlights**: Animated skill tags that bounce in with hover effects.
 - **Detailed Career Path**: Expandable details for key roles and projects.
-- **Automated Deployment**: GitHub Actions deploys to Vercel on push (production) and PRs (previews).
+- **Automated Deployment**: GitHub Actions deploys to Vercel on push (production).
 
 ---
 
