@@ -1,0 +1,66 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main  # Triggers on push to main
+  pull_request:
+    branches:
+      - main  # Triggers on PRs to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Runs on Ubuntu VM
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Matches Vercel’s default Node version
+
+      # Install project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Build the React app
+      - name: Build project
+        run: npm run build  # Assumes "build": "react-scripts build" in package.json
+
+      # Install Vercel CLI
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      # Deploy to Vercel (prod for push, preview for PR)
+      - name: Deploy to Vercel
+        id: deploy  # Assigns an ID to capture output
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            vercel --token $VERCEL_TOKEN --prod
+          else
+            DEPLOY_URL=$(vercel --token $VERCEL_TOKEN)
+            echo "deploy_url=$DEPLOY_URL" >> $GITHUB_OUTPUT
+          fi
+
+      # Comment preview URL on PRs
+      - name: Comment PR with Preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const deployUrl = "${{ steps.deploy.outputs.deploy_url }}";
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `Preview URL: ${deployUrl}`
+            });
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
