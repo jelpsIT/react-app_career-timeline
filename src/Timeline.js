@@ -262,7 +262,7 @@ const Timeline = () => {
       {/* Buttons */}
       <div className="mt-4 sm:mt-8 flex flex-wrap justify-center gap-3 sm:gap-4 px-4">
         <motion.a
-          href="https://www.linkedin.com/in/your-linkedin-profile"
+          href="https://www.linkedin.com/in/josh-dobson-/"
           target="_blank"
           rel="noopener noreferrer"
           className="px-3 sm:px-5 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-lg shadow-lg border border-blue-700/50 text-sm sm:text-base"
