@@ -174,9 +174,9 @@ const Timeline = () => {
 
       {/* Timeline Container */}
       <div
-  ref={scrollRef}
-  className="overflow-x-auto overflow-y-auto custom-scrollbar w-full px-2 sm:px-4"
-		>
+        ref={scrollRef}
+        className="overflow-x-auto overflow-y-auto w-full px-4 sm:px-4 md:overflow-x-auto md:overflow-y-hidden"
+      >
         <div
           className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-blue-600 to-blue-400 opacity-10 sm:opacity-20 md:block hidden"
           style={{
@@ -184,11 +184,11 @@ const Timeline = () => {
             backgroundImage: 'repeating-linear-gradient(to right, #2563eb 0, #2563eb 4px, transparent 4px, transparent 8px)',
           }}
         />
-        <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0">
+        <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
           {timelineData.map((item, index) => (
             <motion.div
               key={index}
-              className={`w-full max-w-[90%] sm:max-w-[300px] md:max-w-[360px] mx-auto bg-gray-800/80 backdrop-blur-md rounded-xl p-3 sm:p-5 flex-shrink-0 shadow-xl border ${index === 0 ? 'border-blue-600/50' : 'border-gray-700/50 hover:border-blue-500/50'} transition-colors duration-300`}
+              className={`w-full max-w-[80%] sm:max-w-[280px] md:max-w-[340px] mx-auto bg-gray-800/80 backdrop-blur-md rounded-xl p-3 sm:p-5 flex-shrink-0 shadow-xl border ${index === 0 ? 'border-blue-600/50' : 'border-gray-700/50 hover:border-blue-500/50'} transition-colors duration-300`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
@@ -262,7 +262,7 @@ const Timeline = () => {
       {/* Buttons */}
       <div className="mt-4 sm:mt-8 flex flex-wrap justify-center gap-3 sm:gap-4 px-4">
         <motion.a
-          href="https://www.linkedin.com/in/josh-dobson-/"
+          href="https://www.linkedin.com/in/your-linkedin-profile"
           target="_blank"
           rel="noopener noreferrer"
           className="px-3 sm:px-5 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-lg shadow-lg border border-blue-700/50 text-sm sm:text-base"
