@@ -4,7 +4,7 @@
 
 A dynamic, animated career timeline built with **React** and **Framer Motion**, showcasing my professional journey from High School to IT Projects Engineer. Deployed on **Vercel** with automated CI/CD via **GitHub Actions**, this project demonstrates skills in modern web development, animation, and deployment workflows.
 
-**[Live Demo](https://react-app-career-timeline.vercel.app)** | **[Preview on PRs](#)** (Check open PRs for preview URLs)
+**[Live Demo](https://portfolio-timeline-kohl.vercel.app/**
 
 ---
 
