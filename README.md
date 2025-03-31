@@ -29,7 +29,7 @@ A dynamic, animated career timeline built with **React** and **Framer Motion**, 
 | **Vercel**         | Hosting and deployment      |
 
 ---
-
+ 
 ## Project Structure
 
 ```plaintext
