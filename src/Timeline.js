@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import './Timeline.css';
+import { FaShieldAlt, FaCogs, FaCloud, FaLaptopCode, FaHandsHelping } from 'react-icons/fa';
 
 const timelineData = [
   {
@@ -137,75 +137,167 @@ const timelineData = [
 ];
 
 const Timeline = () => {
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    const handleWheel = (e) => {
+      e.preventDefault();
+      if (window.innerWidth >= 768) {
+        container.scrollLeft += e.deltaY * 1.5;
+      }
+    };
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => container.removeEventListener('wheel', handleWheel);
+  }, []);
+
   return (
-    <div className="py-16 overflow-x-auto bg-gradient-to-b from-gray-900 to-black custom-scrollbar">
-      <div className="flex space-x-10 px-10 min-w-max">
-        {timelineData.map((item, index) => (
-          <motion.div
-            key={index}
-            className="w-96 bg-gray-900/80 backdrop-blur-md rounded-xl p-6 flex-shrink-0 shadow-2xl border border-gray-800/50 hover:border-indigo-500/50 transition-colors duration-300"
-            initial={{ opacity: 0, y: 80, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.7, delay: index * 0.2, type: 'spring', stiffness: 100 }}
-            whileHover={{ y: -15, scale: 1.02, rotate: 1, boxShadow: '0 25px 50px rgba(99, 102, 241, 0.2)' }}
-          >
+    <div className="py-6 sm:py-12 bg-gradient-to-b from-gray-800 to-gray-900 flex flex-col items-center relative min-h-screen">
+      {/* Header */}
+      <motion.h1
+        className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4 sm:mb-8 tracking-wide px-4 text-center"
+        style={{ fontFamily: "'Poppins', sans-serif" }}
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
+        Career Timeline
+      </motion.h1>
+
+      {/* Background Gradient */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-blue-900/5 to-blue-900/5 pointer-events-none sm:bg-gradient-to-r sm:from-blue-900/10 sm:to-blue-900/10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      />
+
+      {/* Timeline Container */}
+      <div
+  ref={scrollRef}
+  className="overflow-x-auto overflow-y-auto custom-scrollbar w-full px-2 sm:px-4"
+		>
+        <div
+          className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-blue-600 to-blue-400 opacity-10 sm:opacity-20 md:block hidden"
+          style={{
+            transform: 'translateY(-50%)',
+            backgroundImage: 'repeating-linear-gradient(to right, #2563eb 0, #2563eb 4px, transparent 4px, transparent 8px)',
+          }}
+        />
+        <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0">
+          {timelineData.map((item, index) => (
             <motion.div
-              className="h-1 w-28 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mb-6 mx-auto"
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: index * 0.4, ease: 'easeOut' }}
-            />
-            <h2
-              className="text-2xl font-extrabold text-center mb-5 text-indigo-300 tracking-tight"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              key={index}
+              className={`w-full max-w-[90%] sm:max-w-[300px] md:max-w-[360px] mx-auto bg-gray-800/80 backdrop-blur-md rounded-xl p-3 sm:p-5 flex-shrink-0 shadow-xl border ${index === 0 ? 'border-blue-600/50' : 'border-gray-700/50 hover:border-blue-500/50'} transition-colors duration-300`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
+              whileHover={{ scale: 1.03, boxShadow: '0 10px 20px rgba(37, 99, 235, 0.2)' }}
             >
-              {item.period}
-            </h2>
-            <div className="space-y-2">
-              {item.skills.map((skill, i) => (
-                <motion.div
-                  key={i}
-                  className="bg-gray-800/50 text-indigo-400 text-sm font-semibold px-4 py-2 rounded-lg text-center shadow-inner border border-gray-700/50"
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60, scale: 0.8 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  transition={{ duration: 0.5, delay: i * 0.1, type: 'spring', bounce: 0.4 }}
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: '#6366f1',
-                    color: '#ffffff',
-                    borderColor: '#818cf8',
-                    transition: { duration: 0.2 },
-                  }}
-                >
-                  {skill}
-                </motion.div>
-              ))}
-            </div>
-            {item.details && (
               <motion.div
-                className="mt-6 text-sm text-gray-300"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
+                className="h-1 w-16 sm:w-24 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full mb-3 sm:mb-5 mx-auto"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.2, ease: 'easeOut' }}
+              />
+              <h2
+                className={`text-base sm:text-lg md:text-xl font-extrabold text-center mb-2 sm:mb-4 ${index === 0 ? 'text-blue-200' : 'text-blue-300'} tracking-tight`}
+                style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                <ul className="list-none space-y-3">
-                  {item.details.map((detail, i) => (
-                    <motion.li
-                      key={i}
-                      className="flex items-start"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: i * 0.1 }}
-                    >
-                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                      <span>{detail}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            )}
-          </motion.div>
-        ))}
+                {item.period}
+              </h2>
+              <div className="space-y-1 sm:space-y-2">
+                {item.skills.map((skill, i) => (
+                  <motion.div
+                    key={i}
+                    className="flex items-center justify-center bg-gray-700/50 text-blue-400 text-xs sm:text-sm font-semibold px-2 sm:px-3 py-1 sm:py-2 rounded-lg shadow-inner border border-gray-600/50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: i * 0.05, ease: 'easeOut' }}
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: '#2563eb',
+                      color: '#ffffff',
+                      borderColor: '#60a5fa',
+                      transition: { duration: 0.2 },
+                    }}
+                  >
+                    {skill === 'Cybersecurity' && <FaShieldAlt className="mr-1 text-blue-300" />}
+                    {skill === 'Automation' && <FaCogs className="mr-1 text-blue-300" />}
+                    {skill === 'Microsoft Azure' && <FaCloud className="mr-1 text-blue-300" />}
+                    {skill === 'C#' && <FaLaptopCode className="mr-1 text-blue-300" />}
+                    {skill === 'Technical Support' && <FaHandsHelping className="mr-1 text-blue-300" />}
+                    {skill}
+                  </motion.div>
+                ))}
+              </div>
+              {item.details && (
+                <motion.div
+                  className="mt-3 sm:mt-5 text-xs sm:text-sm text-gray-300"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3, ease: 'easeOut' }}
+                >
+                  <ul className="list-none space-y-1 sm:space-y-2">
+                    {item.details.map((detail, i) => (
+                      <motion.li
+                        key={i}
+                        className="flex items-start"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3, delay: i * 0.05 }}
+                      >
+                        <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-blue-500 rounded-full mr-2 mt-1 sm:mt-2 flex-shrink-0"></span>
+                        <span>{detail}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Buttons */}
+      <div className="mt-4 sm:mt-8 flex flex-wrap justify-center gap-3 sm:gap-4 px-4">
+        <motion.a
+          href="https://www.linkedin.com/in/josh-dobson-/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-3 sm:px-5 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-lg shadow-lg border border-blue-700/50 text-sm sm:text-base"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(37, 99, 235, 0.7)', transition: { duration: 0.3 } }}
+          whileTap={{ scale: 0.95 }}
+        >
+          LinkedIn
+        </motion.a>
+        <motion.a
+          href="https://github.com/jelpsIT"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-3 sm:px-5 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-lg shadow-lg border border-blue-700/50 text-sm sm:text-base"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(37, 99, 235, 0.7)', transition: { duration: 0.3 } }}
+          whileTap={{ scale: 0.95 }}
+        >
+          GitHub
+        </motion.a>
+        <motion.a
+          href="mailto:dobsonj@leadforensics.com"
+          className="px-3 sm:px-5 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-lg shadow-lg border border-blue-700/50 text-sm sm:text-base"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(37, 99, 235, 0.7)', transition: { duration: 0.3 } }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Contact
+        </motion.a>
       </div>
     </div>
   );
