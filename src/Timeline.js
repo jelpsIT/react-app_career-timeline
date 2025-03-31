@@ -1,44 +1,144 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import './Timeline.css';
 
 const timelineData = [
   {
-    period: 'High School (2015-2018)',
+    period: 'High School (2010-2013)',
     skills: ['HTML', 'CSS', 'Basic JavaScript', 'XSS', 'Active Directory', 'Batch'],
   },
   {
-    period: 'College (2018-2020)',
-    skills: ['C#', 'C++', 'HTML5', 'Networking', 'Databases', 'Game Development'],
+    period: 'College Year 1 (2013-2014)',
+    skills: ['C#', 'C++', 'Networking', 'Game Development', 'Procedural-Oriented Programming', 'Matrice'],
   },
   {
-    period: 'University (2020-2023)',
-    skills: ['Java', 'Python', '3D Modelling', 'Database Design', 'Network Design', 'Cryptography'],
+    period: 'College Year 2 (2014-2015)',
+    skills: ['Game Design', 'Databases', 'Networking', 'Object Oriented Programming', 'HCI'],
   },
   {
-    period: 'Career (2018-2025)',
+    period: 'University Year 1 (2015-2016)',
+    skills: ['Architecture and Operating Systems', 'Core Computing Concepts', 'Database System Development', 'Networks', 'Programming'],
+  },
+  {
+    period: 'University Year 2 (2016-2017)',
+    skills: ['Python', 'Network Design', 'Web Programming', 'Graphics and Computer Vision'],
+  },
+  {
+    period: 'University Year 3 (2017-2018)',
+    skills: ['3D Computer Graphics and Animation', 'Security and Cryptography'],
+  },
+  {
+    period: 'SaaS Specialist - Lead Forensics - Part time (2018-2019)',
+    skills: ['Communication', 'Analytical Skills'],
+    details: ['Part-time role at Lead Forensics focusing on the USA market, enhancing communication and analytics skills.'],
+  },
+  {
+    period: 'Lead Generation Specialist - Lead Forensics (2019-2020)',
+    skills: ['Communication', 'Data analysis', 'Analytical Skills'],
+    details: [
+      'Generated most revenue for USA LinkedIn channel (07/2019 YTD).',
+      'Contributed 14% of enquiries via LinkedIn USA (07/2019 YTD).',
+    ],
+  },
+  {
+    period: 'Marketing Executive - Webeo (2019)',
+    skills: ['Communication', 'Analytical Skills'],
+    details: [
+      'Worked at Webeo (Jun-Sep 2019) on real-time B2B website personalization.',
+      'Tailored website experiences based on company name, industry, location, and size.',
+    ],
+  },
+  {
+    period: 'IT Administrator - Lead Forensics (2020-2021)',
     skills: [
-      'Project Management',
+      'Interpersonal Skills',
+      'Troubleshooting',
       'Microsoft 365',
-      'Python',
-      'Intune Deployment/Configuration',
-      'Network Security',
-      'Automation',
-      'IT Support',
+      'Technical Support',
+      'IT Service Management',
+      'Windows 10',
+	  'Intune',
     ],
     details: [
-      'SaaS Specialist (2018-2019): Early role at Lead Forensics focusing on communication and analytics.',
-      'Lead Generation Specialist (2019-2020): Generated top revenue for USA LinkedIn channel.',
-      'IT Administrator (2020-2021): Managed 500+ users across UK/US offices with helpdesk and hardware support.',
-      'Senior IT Systems Admin (2021-2023): Led cybersecurity, Microsoft 365, and process automation.',
-      'IT Support Projects Engineer (2023-Present): Driving IT projects with Freshservice, Azure, and Intune.',
-      'Voluntary Work (2022): Taught IT and repaired laptops in Zambia.',
+      '1st Line IT Administrator managing 500+ users across 3 UK and 2 USA offices.',
+      'Handled helpdesk duties, on-prem support, and hardware (PCs, laptops, Macs, phones).',
+      'Implemented new IT solutions to improve business operations.',
+	  'Intune configuration and deployed during COVID period',
+    ],
+  },
+  {
+    period: 'Senior IT Systems Admin - Lead Forensics (2021-2022)',
+    skills: [
+      'Cybersecurity',
+      'Microsoft Intune',
+      'Powershell',
+      'Process Automation',
+      'Microsoft Azure',
+      'Network Security',
+    ],
+    details: [
+      'Led cybersecurity initiatives and Microsoft 365 administration.',
+      'Automated processes and managed backups for system reliability.',
+    ],
+  },
+  {
+    period: 'Senior IT Systems Admin - Lead Forensics (2022-2023)',
+    skills: [
+      'Incident Management',
+      'Powershell',
+      'Information Security',
+      'Backup & Recovery Systems',
+      'Powershell',
+      '3rd Line Support',
+    ],
+    details: [
+      'Continued leadership in cybersecurity and system administration.',
+      'Enhanced incident response and security patching processes.',
+    ],
+  },
+  {
+    period: 'Voluntary Work - Zambia (2022)',
+    skills: ['Customer Service', 'Computer Repair', 'Technical Support'],
+    details: [
+      'Taught IT and repaired laptops at Ipalo Christian School (Sep 18-22, 2022).',
+      'Installed eBook readers and educational resources on devices.',
+    ],
+  },
+  {
+    period: 'IT Support Projects Engineer - Lead Forensics (2023-2024)',
+    skills: [
+      'Project Management',
+      'Microsoft Intune',
+      'Microsoft Azure',
+      'Automation',
+      'Freshservice ITSM',
+      'Network Security',
+    ],
+    details: [
+      'Drove IT projects with Freshservice, Azure, and Intune.',
+      'Managed MDM deployment and infrastructure improvements.',
+    ],
+  },
+  {
+    period: 'IT Support Projects Engineer - Lead Forensics (2024-2025)',
+    skills: [
+      'Powershell',
+      'API Development',
+      'Data Analytics',
+      'Microsoft Graph API',
+      'FortiNet',
+      'Security Management',
+    ],
+    details: [
+      'Focused on automation, API development, and advanced security.',
+      'Implemented automated reports and outage management solutions.',
     ],
   },
 ];
 
 const Timeline = () => {
   return (
-    <div className="py-16 overflow-x-auto bg-gradient-to-b from-gray-900 to-black">
+    <div className="py-16 overflow-x-auto bg-gradient-to-b from-gray-900 to-black custom-scrollbar">
       <div className="flex space-x-10 px-10 min-w-max">
         {timelineData.map((item, index) => (
           <motion.div
@@ -102,7 +202,6 @@ const Timeline = () => {
                     </motion.li>
                   ))}
                 </ul>
-                {/* Note: Fixed closing tag from </li> to </motion.li> */}
               </motion.div>
             )}
           </motion.div>

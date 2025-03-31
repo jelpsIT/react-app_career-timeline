@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<style>
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(17, 24, 39, 0.8); /* Matches gray-900 */
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #6366f1, #a855f7); /* Indigo-500 to Purple-500 */
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to right, #818cf8, #c084fc); /* Lighter shades */
+  }
+</style>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
