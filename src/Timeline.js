@@ -12,7 +12,7 @@ const timelineData = [
   },
   {
     period: 'University (2020-2023)',
-    skills: ['Java', 'Python', '3D Modelling', 'Database Design', 'Network Design', 'Cryptography',],
+    skills: ['Java', 'Python', '3D Modelling', 'Database Design', 'Network Design', 'Cryptography'],
   },
   {
     period: 'Career (2018-2025)',
@@ -20,7 +20,7 @@ const timelineData = [
       'Project Management',
       'Microsoft 365',
       'Python',
-	  'Intune Deployment/Configuration',
+      'Intune Deployment/Configuration',
       'Network Security',
       'Automation',
       'IT Support',
@@ -38,35 +38,44 @@ const timelineData = [
 
 const Timeline = () => {
   return (
-    <div className="py-12 overflow-x-auto">
-      <div className="flex space-x-8 px-8 min-w-max">
+    <div className="py-16 overflow-x-auto bg-gradient-to-b from-gray-900 to-black">
+      <div className="flex space-x-10 px-10 min-w-max">
         {timelineData.map((item, index) => (
           <motion.div
             key={index}
-            className="w-96 bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-6 flex-shrink-0 shadow-xl border border-gray-600/30"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.3, type: 'spring', stiffness: 80 }}
-            whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}
+            className="w-96 bg-gray-900/80 backdrop-blur-md rounded-xl p-6 flex-shrink-0 shadow-2xl border border-gray-800/50 hover:border-indigo-500/50 transition-colors duration-300"
+            initial={{ opacity: 0, y: 80, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: index * 0.2, type: 'spring', stiffness: 100 }}
+            whileHover={{ y: -15, scale: 1.02, rotate: 1, boxShadow: '0 25px 50px rgba(99, 102, 241, 0.2)' }}
           >
             <motion.div
-              className="h-1 w-24 bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full mb-6 mx-auto"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1, delay: index * 0.5, ease: 'easeOut' }}
+              className="h-1 w-28 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mb-6 mx-auto"
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: index * 0.4, ease: 'easeOut' }}
             />
-            <h2 className="text-2xl font-bold text-center mb-4 text-teal-200" style={{ fontFamily: "'Poppins', sans-serif" }}>
+            <h2
+              className="text-2xl font-extrabold text-center mb-5 text-indigo-300 tracking-tight"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
               {item.period}
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2">
               {item.skills.map((skill, i) => (
                 <motion.div
                   key={i}
-                  className="bg-gray-900 text-teal-300 text-sm font-medium px-4 py-2 rounded-full text-center shadow-md"
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.15, type: 'spring', bounce: 0.3 }}
-                  whileHover={{ scale: 1.1, backgroundColor: '#2dd4bf', color: '#1f2937' }}
+                  className="bg-gray-800/50 text-indigo-400 text-sm font-semibold px-4 py-2 rounded-lg text-center shadow-inner border border-gray-700/50"
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60, scale: 0.8 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  transition={{ duration: 0.5, delay: i * 0.1, type: 'spring', bounce: 0.4 }}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: '#6366f1',
+                    color: '#ffffff',
+                    borderColor: '#818cf8',
+                    transition: { duration: 0.2 },
+                  }}
                 >
                   {skill}
                 </motion.div>
@@ -75,18 +84,25 @@ const Timeline = () => {
             {item.details && (
               <motion.div
                 className="mt-6 text-sm text-gray-300"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8, ease: 'easeOut' }}
+                transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
               >
-                <ul className="list-none space-y-2">
+                <ul className="list-none space-y-3">
                   {item.details.map((detail, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="w-2 h-2 bg-teal-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                    <motion.li
+                      key={i}
+                      className="flex items-start"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.1 }}
+                    >
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mr-3 mt-2 flex-shrink-0"></span>
                       <span>{detail}</span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
+                {/* Note: Fixed closing tag from </li> to </motion.li> */}
               </motion.div>
             )}
           </motion.div>
