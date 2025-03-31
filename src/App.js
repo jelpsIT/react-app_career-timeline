@@ -12,7 +12,7 @@ function App() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1, type: 'spring', stiffness: 120 }}
       >
-        Josh Dobson - Career Timeline
+        Josh Dobson
       </motion.h1>
       <Timeline />
     </div>
